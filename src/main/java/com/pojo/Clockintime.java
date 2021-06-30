@@ -1,11 +1,16 @@
 package com.pojo;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class Clockintime {
 
   private int staffId;
+  @DateTimeFormat(pattern = "yyyy-MM-dd")
+  @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
   private Date clockInTime;
 
   public Clockintime() {
