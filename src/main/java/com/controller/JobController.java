@@ -34,7 +34,7 @@ public class JobController {
        return result > 0 ? r.success():r.error();
     }
     //TODO 分页展示员工信息功能
-    @RequestMapping(value = "/ShwoJobInfoLimit",method = RequestMethod.GET)
+    @RequestMapping(value = "/ShowJobInfoLimit",method = RequestMethod.GET)
     public R shwoJobInfo(@RequestParam("pageNum") Integer pageNum) {
         List<Job> job = jobService.queryJobLimit(pageNum);
         if (CollectionUtils.isEmpty(job)){

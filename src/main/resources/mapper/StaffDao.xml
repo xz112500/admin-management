@@ -103,4 +103,7 @@
     <update id="rePassword" parameterType="int" >
         UPDATE am_system.staff SET Password='123456' where StaffId=#{staffId};
     </update>
+    <delete id="deleteStaffById" parameterType="int">
+        delete from am_system.staff where staffId=#{staffId}
+    </delete>
 </mapper>

@@ -62,7 +62,7 @@ public class StaffController {
     public R Login(@RequestParam(value = "username") String username,
                    @RequestParam(value = "password") String password){
         Staff staff = staffService.queryUserAndPass(username, password);
-        return staff != null ? r.success() : r.error().message("用户名或密码错误");
+        return staff != null ? r.success(staff) : r.error().message("用户名或密码错误");
     }
     @GetMapping("/queryApprove")
     public R queryApprove(){

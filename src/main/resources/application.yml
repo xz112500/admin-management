@@ -1,11 +1,11 @@
 server:
-  port: 8080
+  port: 8081
 
 spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
-    url: jdbc:mysql://localhost:3306/am_system?useUnicode=true&characterEncoding=UTF-8&serverTimezone=GMT%2b8
-    username: root
+    url: jdbc:mysql://8.140.107.62:3306/am_system?useUnicode=true&characterEncoding=UTF-8&serverTimezone=GMT%2b8
+    username: xzfine
     password: Xz112500
     driver-class-name: com.mysql.cj.jdbc.Driver
     druid:
