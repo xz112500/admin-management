@@ -40,4 +40,6 @@ public interface StaffService {
     int deleteStaffById(int staffId);
 
     int updateStaffInfo(Staff staff);
+
+    Staff queryStaffByName(String username);
 }

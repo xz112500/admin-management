@@ -106,4 +106,7 @@
     <delete id="deleteStaffById" parameterType="int">
         delete from am_system.staff where staffId=#{staffId}
     </delete>
+    <select id="queryStaffByName" parameterType="java.lang.String" resultType="com.pojo.Staff">
+        select * from am_system.staff where UserName=#{username}
+    </select>
 </mapper>

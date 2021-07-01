@@ -84,7 +84,7 @@ public class StaffImpl implements StaffService {
         Staff staff = this.staffDao.queryUserAndPass(username, password);
         if (staff != null) {
             String token = JWTUtil.getToken(staff.getStaffId(), staff.getUserName(), staff.getPassword());
-            this.staffDao.updateToken(token, staff.getStaffId());
+            this.staffDao.updateToken(token,staff.getStaffId());
             staff.setToken(token);
             return staff;
         } else {
@@ -123,6 +123,11 @@ public class StaffImpl implements StaffService {
     @Transactional
     public int updateStaffInfo(Staff staff) {
         return staffDao.updateStaffInfo(staff);
+    }
+
+    @Override
+    public Staff queryStaffByName(String username) {
+        return staffDao.queryStaffByName(username);
     }
 
 }

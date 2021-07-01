@@ -1,5 +1,6 @@
 package com.controller;
 
+import com.annotation.Admin;
 import com.pojo.Job;
 import com.service.JobService;
 import com.utils.R;
@@ -24,6 +25,7 @@ public class JobController {
     }
     //TODO 删除现有岗位功能
     @RequestMapping(value = "/DeleteJob/{jobId}",method = RequestMethod.DELETE)
+    @Admin
     public R deleteStaff(@PathVariable("jobId") int jobId) {
         return r.success(jobService.deleteJobById(jobId));
     }

@@ -1,5 +1,6 @@
 package com.controller;
 
+import com.annotation.Admin;
 import com.pojo.Holidays;
 import com.service.HolidayService;
 import com.utils.R;
@@ -38,12 +39,14 @@ public class HolidaysController {
 
     //添加假期
     @PostMapping("/addHolidayTimeByTime")
+    @Admin
     public R addHolidayTimeByTime(@RequestParam(value = "holidays") Holidays holidays){
         return r.success(holidaysService.addHolidayTimeByTime(holidays));
     }
 
     //删除假期
     @DeleteMapping("/delectHolidayTimeById/{holidayId}")
+    @Admin
     public R delectHolidayTimeById(@PathVariable(value = "holidayId") int holidayId){
         return r.success(holidaysService.delectHolidayTimeById(holidayId));
     }

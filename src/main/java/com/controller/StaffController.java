@@ -1,5 +1,6 @@
 package com.controller;
 
+import com.annotation.Admin;
 import com.pojo.Staff;
 import com.service.StaffService;
 import com.utils.R;
@@ -77,12 +78,14 @@ public class StaffController {
     }
     //TODO 添加员工功能
     @PostMapping(value ="/AddStaff")
+    @Admin
     public R addNewStaff(@RequestBody Staff staff) {
         int result = staffService.addNewStaff(staff);
         return result >0 ? r.success():r.error();
     }
     //TODO 重置密码功能
     @PutMapping(value ="/rePassWord")
+    @Admin
     public R rePassWord(@RequestParam("staffId") Integer staffId)
     {
         int result = staffService.rePassword(staffId);
@@ -90,12 +93,14 @@ public class StaffController {
     }
     //TODO 删除员工
     @DeleteMapping(value = "/deleteStaff/{staffId}")
+    @Admin
     public R deleteStaff(@PathVariable(value = "staffId") int staffId){
         int i = staffService.deleteStaffById(staffId);
         return i > 0 ? r.success():r.error();
     }
     //TODO 修改员工信息
     @RequestMapping(value = "dateStaffInfo", method = RequestMethod.POST)
+    @Admin
     public R dateStaffInfo(@RequestBody Staff staff){
         if(staffService.updateStaffInfo(staff)>1)
         {

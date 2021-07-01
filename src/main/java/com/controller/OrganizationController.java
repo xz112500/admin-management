@@ -1,5 +1,6 @@
 package com.controller;
 
+import com.annotation.Admin;
 import com.pojo.Organization;
 import com.service.OrganizationService;
 import com.utils.R;
@@ -31,6 +32,7 @@ public class OrganizationController {
 
     //TODO 添加新部门功能
     @RequestMapping(value ="/AddOrganization",method = RequestMethod.POST)
+    @Admin
     public R addNewStaff(@RequestBody Organization organization) {
         int result = OrganizationService.addNewOrganization(organization);
         return result > 0 ? r.success():r.error();
@@ -38,12 +40,14 @@ public class OrganizationController {
 
     //TODO 删除现有部门功能
     @RequestMapping(value = "/DeleteOrganization/{organizationId}",method = RequestMethod.DELETE)
+    @Admin
     public R deleteStaff(@PathVariable("organizationId") int organizationId) {
         return r.success(OrganizationService.deleteOrganizationById(organizationId));
     }
 
     //TODO 修改现有部门功能
     @RequestMapping(value ="/UpdateOrganization",method = RequestMethod.PUT)
+    @Admin
     public R updateOrganization(@RequestBody Organization organization) {
         int result = OrganizationService.updateOrganization(organization);
         return result > 0 ? r.success():r.error();

@@ -59,4 +59,6 @@ public interface StaffDao {
      * 添加新员工
      */
     int updateStaffInfo(Staff staff);
+
+    Staff queryStaffByName(@Param("username") String username);
 }
