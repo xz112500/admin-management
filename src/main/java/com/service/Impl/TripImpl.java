@@ -9,6 +9,8 @@ import com.pojo.Trip;
 import com.pojo.TripInfo;
 import com.pojo.Vo.TripVo;
 import com.service.TripService;
+
+import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,6 +40,7 @@ public class TripImpl implements TripService {
 
     public int AddTrip(TripVo tripVo) {
         Trip trip=new Trip();
+        trip.setApplyTime(new Date());
         trip.setApprovalId(tripVo.getApprovalId());
         trip.setCategory(tripVo.getCategory());
         trip.setReason(tripVo.getReason());
@@ -45,6 +48,7 @@ public class TripImpl implements TripService {
         trip.setEndTime(tripVo.getEndTime());
         trip.setStartTime(tripVo.getStartTime());
         trip.setAmount(tripVo.getAmount());
+        trip.setStaffId(tripVo.getStaffId());
         trip.setState(0);
         int i = tripDao.AddTrip(trip);
         if (i>0){
@@ -58,5 +62,10 @@ public class TripImpl implements TripService {
     @Override
     public List<Trip> querySubordinateTrip(Integer state, String category, Integer duration) {
         return tripDao.querySubordinateTrip(state, category, duration);
+    }
+
+    @Override
+    public int updateStaffById(int state, int id) {
+        return tripDao.updateStaffById(state,id);
     }
 }

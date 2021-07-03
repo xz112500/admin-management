@@ -20,8 +20,8 @@ public class OrganizationImpl implements OrganizationService {
     }
 
     @Override
-    public List<Organization> queryOrganizationLimit(int pageNum) {
-        return adminOrganizationDao.queryOrganizationLimit((pageNum-1)*5);
+    public List<Organization> queryOrganizationLimit(Integer pageNum,Integer pageSize) {
+        return adminOrganizationDao.queryOrganizationLimit(pageNum, pageSize);
     }
 
     @Override

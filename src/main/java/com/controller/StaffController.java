@@ -42,10 +42,9 @@ public class StaffController {
     }
     @GetMapping("/Approve")
     public R findBy(@RequestParam(value = "pageNum",defaultValue = "1") Integer pageNum,
-                    @RequestParam(value = "pageSize",defaultValue = "5") Integer pageSize){
-        List<Staff> staff = staffService.queryApprove();
-        List<Staff> collect = staff.stream().skip((long) (pageNum - 1) * pageSize).limit(pageSize).collect(Collectors.toList());
-        return r.success(collect);
+                    @RequestParam(value = "pageSize",defaultValue = "3") Integer pageSize){
+        List<Staff> staff = staffService.queryApprove((pageNum-1)*pageSize,pageSize);
+        return r.success(staff);
     }
     /**
      * 上传头像
@@ -65,10 +64,10 @@ public class StaffController {
         Staff staff = staffService.queryUserAndPass(username, password);
         return staff != null ? r.success(staff) : r.error().message("用户名或密码错误");
     }
-    @GetMapping("/queryApprove")
+  /*  @GetMapping("/queryApprove")
     public R queryApprove(){
         return r.success(staffService.queryApprove());
-    }
+    }*/
 
     @GetMapping("/queryMyLeave")
     public R queryMyLeave(@RequestParam(value = "state",required = false) Integer state,
@@ -99,7 +98,7 @@ public class StaffController {
         return i > 0 ? r.success():r.error();
     }
     //TODO 修改员工信息
-    @RequestMapping(value = "dateStaffInfo", method = RequestMethod.POST)
+    @RequestMapping(value = "updateStaff", method = RequestMethod.POST)
     @Admin
     public R dateStaffInfo(@RequestBody Staff staff){
         if(staffService.updateStaffInfo(staff)>1)

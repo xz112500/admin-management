@@ -46,10 +46,10 @@ public class AdminHandle {
         RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = ((ServletRequestAttributes)requestAttributes).getRequest();
         String token = request.getHeader("token");
-        System.out.println("发送的"+token);
+    /*    System.out.println("发送的"+token);*/
         Claims claims = null;
         if (token == null) {
-            return this.r.error();
+            return this.r.error().message("请重新登录!");
         } else {
             try {
                 claims = JWTUtil.parseToken(token);
@@ -58,9 +58,9 @@ public class AdminHandle {
             }
 
             String username = (String)claims.get("username");
-            String password = (String)claims.get("password");
+    /*        String password = (String)claims.get("password");*/
             Staff staff = this.staffService.queryStaffByName(username);
-            System.out.println("数据库的"+staff.getToken());
+      /*      System.out.println("数据库的"+staff.getToken());*/
             if (token.equals(staff.getToken())) {
                 if (staff.getState() == 0 || staff.getJobId() != 4) {
                     return this.r.error().message("您无权操作");

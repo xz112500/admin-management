@@ -9,7 +9,7 @@ public interface OrganizationService {
     Organization queryOrganizationById(int organizationId);
 
     //查询所有部门
-    List<Organization> queryOrganizationLimit(int pageNum);
+    List<Organization> queryOrganizationLimit(Integer pageNum,Integer pageSize);
 
     //添加部门
     int addNewOrganization(Organization organization);

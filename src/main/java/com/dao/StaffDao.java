@@ -21,7 +21,8 @@ public interface StaffDao {
     /**
      * 查询未批准假期
      */
-    List<Staff> queryApprove();
+    List<Staff> queryApprove(@Param("pageNum") Integer pageNum,
+                             @Param("pageSize") Integer pageSize);
 
     /**
      * 登录验证

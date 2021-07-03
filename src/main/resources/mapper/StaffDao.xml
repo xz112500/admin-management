@@ -25,12 +25,12 @@
      <result column="HigherOrgId" property="higherOrgId"/>
      <result column="Remark" property="remark"/>
     </association>
-    <association column="job" property="job">
+    <association column="job" property="job" javaType="com.pojo.Job">
      <id column="JobId" property="jobId"/>
      <result column="JobName" property="jobName"/>
      <result column="Responsibilities" property="responsibilities"/>
     </association>
-    <collection javaType="com.pojo.Askforleave" property="askforleave" >
+    <collection javaType="com.pojo.Askforleave" property="askforleave">
         <id column="LeaveId" property="leaveId"/>
         <result column="ApplyTime" property="applyTime"/>
         <result column="StartTime" property="startTime"/>
@@ -68,7 +68,7 @@
         left join askforleave b on a.StaffId=b.Applicant
         left join organization c on c.OrganizationId =a.OrganizationId
         where b.State=1
-        order by a.StaffId
+        limit #{pageNum},#{pageSize}
     </select>
 <!--    登录验证-->
     <select id="queryUserAndPass" resultType="com.pojo.Staff">
@@ -109,4 +109,10 @@
     <select id="queryStaffByName" parameterType="java.lang.String" resultType="com.pojo.Staff">
         select * from am_system.staff where UserName=#{username}
     </select>
+    <update id="updateStaffInfo">
+        update staff set UserName=#{userName},Password=#{password},State=#{state},StaffName=#{staffName},Gender=#{gender},
+        Birthday=#{birthday},OrganizationId=#{organizationId},JobId=#{jobId},DirectBoss=#{directBoss},Birthplace=#{birthplace},
+        Position=#{position},PhoneNumber=#{phoneNumber},Email=#{email},PhotoUrl=#{photoUrl}
+        where StaffId=#{staffId}
+    </update>
 </mapper>

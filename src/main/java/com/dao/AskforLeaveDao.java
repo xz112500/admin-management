@@ -2,6 +2,7 @@ package com.dao;
 
 import com.pojo.Askforleave;
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.Date;
@@ -25,7 +26,7 @@ public interface AskforLeaveDao {
      * @return 影响行数
      * 修改状态
      */
-    int updateStateById(int state,int id);
+    int updateStateById(@Param("state") int state,@Param("id") int id);
 
     /**
      * 查询所有请假

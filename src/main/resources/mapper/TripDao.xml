@@ -43,7 +43,7 @@
    </select>
    <insert id="AddTrip">
       insert into trip (ApplyTime, StartTime, EndTime, StaffId, Duration, Category, Amount, Reason, State, ApprovalId) VALUES
-      (#{applytime},#{startTime},#{endTime},#{staffId},#{duration},#{category},#{amount},#{reason},#{state},#{appvovalId})
+      (#{applyTime},#{startTime},#{endTime},#{staffId},#{duration},#{category},#{amount},#{reason},#{state},#{approvalId})
    </insert>
    <select id="querySubordinateTrip" resultMap="TripMapper">
       select a.*,c.*,s.* from trip a
@@ -61,4 +61,7 @@
    </if>
 </where>
    </select>
+   <update id="updateStaffById">
+      update trip set State = #{state} where TripId=#{id}
+   </update>
 </mapper>

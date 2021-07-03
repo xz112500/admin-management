@@ -27,8 +27,8 @@ public class StaffImpl implements StaffService {
     }
 
     @Override
-    public List<Staff> queryApprove() {
-        return staffDao.queryApprove();
+    public List<Staff> queryApprove(Integer pageNum,Integer pageSize) {
+        return staffDao.queryApprove(pageNum, pageSize);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.dao;
 
 import com.pojo.Organization;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -14,7 +15,7 @@ public interface OrganizationDao {
     int queryOrganizationId(String  organizationName);
 
     //查询所有部门
-    List<Organization> queryOrganizationLimit(int pageNum);
+    List<Organization> queryOrganizationLimit(@Param("pageNum") Integer pageNum,@Param("pageSize")Integer pageSize);
 
     //添加部门
     int addNewOrganization(Organization organization);

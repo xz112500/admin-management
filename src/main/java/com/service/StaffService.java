@@ -16,7 +16,7 @@ public interface StaffService {
     /**
      * 查询未批准请假
      */
-    List<Staff>  queryApprove();
+    List<Staff>  queryApprove(Integer pageNum,Integer pageSize);
 
     /**
      * 上传头像

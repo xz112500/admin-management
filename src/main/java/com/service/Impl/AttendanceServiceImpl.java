@@ -28,7 +28,15 @@ public class AttendanceServiceImpl implements AttendanceService {
     //查看个人的日考勤情况按选择的时间来查
     @Override
     public List<Attendance> queryAttendanceDayByTime(int staffId, Date date, Integer pageNum, Integer pageSize) {
-        return attendanceDao.queryAttendanceDayByTime(staffId,date,(pageNum-1)*pageSize,pageSize);
+        Date time=new Date();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        String s = format.format(date);
+        try {
+            time=format.parse(s);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return attendanceDao.queryAttendanceDayByTime(staffId,time,(pageNum-1)*pageSize,pageSize);
     }
 
     /**

@@ -20,10 +20,11 @@ public class OrganizationController {
     private OrganizationService OrganizationService;
 
     //TODO 分页展示员工信息功能
-    @RequestMapping(value = "/ShwoOrganizationInfoLimit",method = RequestMethod.GET)
-    public R showOrganizationInfo(@RequestParam("pageNum") Integer pageNum)
+    @RequestMapping(value = "/ShowOrganizationInfoLimit",method = RequestMethod.GET)
+    public R showOrganizationInfo(@RequestParam("pageNum") Integer pageNum,
+                                  @RequestParam("pageSize") Integer pageSize)
     {
-        List<Organization> organizations = OrganizationService.queryOrganizationLimit(pageNum);
+        List<Organization> organizations = OrganizationService.queryOrganizationLimit((pageNum-1)*pageSize,pageSize);
         if (CollectionUtils.isEmpty(organizations)){
             return r.error();
         }

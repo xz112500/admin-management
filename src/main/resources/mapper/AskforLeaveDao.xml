@@ -37,8 +37,8 @@
         value (#{applyTime},#{startTime},#{endTime},#{duration},#{applicant},#{category},#{reason},#{state},#{approvalId})
     </insert>
     <!--修改批准状态-->
-    <update id="updateStateById" parameterType="java.lang.Integer">
-        update askforleave set State = #{arg0} where LeaveId = #{arg1}
+    <update id="updateStateById">
+        update askforleave set State = #{state} where LeaveId = #{id}
     </update>
     <!--查询所有请假-->
     <select id="queryAllLeave" resultType="com.pojo.Askforleave" resultMap="LeaveMapper">
@@ -56,7 +56,7 @@
     </select>
     <!--查看我的请假-->
     <select id="queryMyAsk" resultType="com.pojo.Askforleave" resultMap="LeaveMapper">
-        select * from am_system.askforleave a, am_system.staff b where a.Applicant=#{applicant} and b.StaffId=${staffId};
+        select * from am_system.askforleave a, am_system.staff b where a.Applicant=#{applicant} and b.StaffId=#{staffId};
     </select>
     <!--查看部门请假-->
     <select id="queryOrgAsk" resultType="com.pojo.Askforleave" resultMap="LeaveMapper">

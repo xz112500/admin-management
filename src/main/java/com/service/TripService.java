@@ -19,4 +19,6 @@ public interface TripService {
     List<Trip> querySubordinateTrip(@Param("state")Integer state,
                                     @Param("category") String category,
                                     @Param("duration") Integer duration);
+
+    int updateStaffById(int state,int id);
 }

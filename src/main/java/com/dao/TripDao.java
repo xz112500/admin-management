@@ -17,4 +17,7 @@ public interface TripDao {
     List<Trip> querySubordinateTrip(@Param("state")Integer state,
                                     @Param("category") String category,
                                     @Param("duration") Integer duration);
+
+    int updateStaffById(@Param("state") int state,
+                        @Param("id") int id);
 }

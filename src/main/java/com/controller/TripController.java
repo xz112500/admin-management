@@ -39,4 +39,10 @@ public class TripController {
                                   @RequestParam(value = "duration",required = false) Integer duration){
         return r.success(tripService.querySubordinateTrip(state, category, duration));
     }
+    @PutMapping("/updateStaffById/{state}/{id}")
+    public R updateStaffById(@PathVariable(value = "state") int state,
+                             @PathVariable(value = "id") int id){
+        int i = tripService.updateStaffById(state, id);
+        return i > 0 ? r.success():r.error();
+    }
 }
