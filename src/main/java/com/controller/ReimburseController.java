@@ -41,12 +41,20 @@ public class ReimburseController {
         return r.success(reimburseService.queryAllSub());
     }
     @GetMapping(value = "/queryApprove")
-    public R queryApprove(){
-        return r.success(reimburseService.queryApprove());
+    public R queryApprove(@RequestParam(value = "pageNum",defaultValue = "1") Integer pageNum,
+                          @RequestParam(value = "pageSize",defaultValue = "3") Integer pageSize){
+        List<Reimbursement> reimbursements = reimburseService.queryApprove();
+        List<Reimbursement> collect = reimbursements.stream().skip((long) (pageNum - 1) *
+        pageSize).limit(pageSize).collect(Collectors.toList());
+        return r.success(collect);
     }
     @GetMapping(value = "/queryReimById")
-    public R queryReimById(@RequestParam(value = "id") int id){
-        return  r.success(reimburseService.queryReimById(id));
+    public R queryReimById(@RequestParam(value = "id") int id,
+                           @RequestParam(value = "pageNum") Integer pageNum,
+                           @RequestParam(value = "pageSize") Integer pageSize){
+        List<Reimbursement> reimbursements = reimburseService.queryReimById(id);
+        List<Reimbursement> collect = reimbursements.stream().skip((long) (pageNum - 1) * pageSize).limit(pageSize).collect(Collectors.toList());
+        return  r.success(collect);
     }
     @GetMapping(value = "/queryMyReim")
     public R queryMyReim(@RequestParam(value = "state",required = false) Integer state,
@@ -55,5 +63,14 @@ public class ReimburseController {
                          @RequestParam(value = "applicant") int applicant){
         return r.success(reimburseService.queryMyReim(state, subjectId, totalAmount,applicant));
     }
-
+    @PutMapping(value = "/updateStateById/{state}/{reimId}")
+    public R updateStateById(@PathVariable(value = "state") int state,
+                             @PathVariable(value = "reimId") int reimId){
+        int i = reimburseService.updateStateById(state, reimId);
+        return i > 0 ? r.success():r.error();
+    }
+    @GetMapping("/queryAllContent")
+    public R queryAllContent(){
+        return  r.success(reimburseService.queryAllContent());
+    }
 }

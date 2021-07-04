@@ -5,6 +5,8 @@ import com.dao.OtherConsumeDao;
 import com.dao.ScheduleDao;
 import com.dao.TripDao;
 import com.dao.TripInfoDao;
+import com.pojo.Otherconsume;
+import com.pojo.Schedule;
 import com.pojo.Trip;
 import com.pojo.TripInfo;
 import com.pojo.Vo.TripVo;
@@ -51,12 +53,17 @@ public class TripImpl implements TripService {
         trip.setStaffId(tripVo.getStaffId());
         trip.setState(0);
         int i = tripDao.AddTrip(trip);
+        System.out.println(trip.getTripId());
         if (i>0){
-            scheduleDao.AddSchedule(tripVo.getSchedules());
+            List<Schedule> r = tripVo.getSchedules();
+            r.forEach(item->{ item.setTripId(trip.getTripId());});
+            scheduleDao.AddSchedule(r);
         }else {
             return -1;
         }
-        return otherConsumeDao.AddOtherConsume(tripVo.getOtherconsumes());
+        List<Otherconsume> otherconsumes = tripVo.getOtherconsumes();
+        otherconsumes.forEach(item->{item.setTripId(trip.getTripId());});
+        return otherConsumeDao.AddOtherConsume(otherconsumes);
     }
 
     @Override

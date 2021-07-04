@@ -1,10 +1,14 @@
 package com.controller;
 
+import com.pojo.TripInfo;
 import com.pojo.Vo.TripVo;
 import com.service.TripService;
 import com.utils.R;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("Trip")
@@ -20,8 +24,12 @@ public class TripController {
         return r.success(tripService.queryAllTrip());
     }
     @GetMapping("/queryTripInfoById")
-    public R queryTripInfoById(@RequestParam(value = "id") int id){
-        return  r.success(tripService.queryTripInfoById(id));
+    public R queryTripInfoById(@RequestParam(value = "id") int id,
+                               @RequestParam(value = "pageNum",defaultValue = "1") Integer pageNum,
+                               @RequestParam(value = "pageSize",defaultValue = "10") Integer pageSize){
+        List<TripInfo> tripInfos = tripService.queryTripInfoById(id);
+        List<TripInfo> collect = tripInfos.stream().skip((long) (pageNum - 1) * pageSize).limit(pageSize).collect(Collectors.toList());
+        return r.success(collect);
     }
     @PostMapping("/AddTrip")
     public R AddTrip(@RequestBody TripVo tripVo){

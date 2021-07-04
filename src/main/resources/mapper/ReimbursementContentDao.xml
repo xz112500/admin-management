@@ -7,4 +7,7 @@
         insert into reimbursementcontent (SubjectId,ContentName) values
         (#{subjectId},#{contentName})
     </insert>
+    <select id="queryAllContent" resultType="com.pojo.Reimbursementcontent">
+        select * from  reimbursementcontent
+    </select>
 </mapper>

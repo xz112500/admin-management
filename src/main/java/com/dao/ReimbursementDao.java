@@ -25,4 +25,7 @@ public interface ReimbursementDao {
                                   @Param("subjectId") Integer subjectId,
                                   @Param("totalAmount")Integer totalAmount,
                                   @Param("applicant") int applicant);
+
+  int updateStateById(@Param("state") int state,
+                      @Param("reimId") int reimId);
  }

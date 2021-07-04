@@ -45,10 +45,7 @@ public class ReimburseImpl implements ReimburseService {
         expenseitem.setConsumeTime(reimbursementVo.getConsumeTime());
         expenseitem.setCost(reimbursementVo.getCost());
         expenseitem.setApplicant(reimbursementVo.getApplicant());
-        List<Integer> collect = reimbursementDao.queryAllReim().stream().map(Reimbursement::getReimId).collect(Collectors.toList());
-        if (collect.contains(reimbursementVo.getApplicant())) {
-            return this.expenseItemService.AddExpenseItem(expenseitem);
-        } else {
+            expenseItemService.AddExpenseItem(expenseitem);
             Reimbursement reimbursement = new Reimbursement();
             reimbursement.setApplyTime(new Date());
             reimbursement.setState(0);
@@ -58,7 +55,6 @@ public class ReimburseImpl implements ReimburseService {
             reimbursement.setTotalAmount(reimbursementVo.getTotalAmount());
             int i = this.expenseItemService.AddExpenseItem(expenseitem);
             return i > 0 ? this.reimbursementDao.AddReimburse(reimbursement) : -1;
-        }
     }
 
     @Override
@@ -102,6 +98,16 @@ public class ReimburseImpl implements ReimburseService {
     @Override
     public List<Reimbursement> queryMyReim(Integer state,Integer subjectId,Integer totalAmount,int applicant) {
         return reimbursementDao.queryMyReim(state, subjectId, totalAmount, applicant);
+    }
+
+    @Override
+    public int updateStateById(int state, int reimId) {
+        return reimbursementDao.updateStateById(state, reimId);
+    }
+
+    @Override
+    public List<Reimbursementcontent> queryAllContent() {
+        return reimbursementContentDao.queryAllContent();
     }
 
 

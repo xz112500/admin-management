@@ -42,6 +42,9 @@
       order by a.ApplyTime
    </select>
    <insert id="AddTrip">
+      <selectKey  resultType="java.lang.Integer" keyProperty="tripId" order="AFTER">
+         SELECT LAST_INSERT_ID()
+      </selectKey>
       insert into trip (ApplyTime, StartTime, EndTime, StaffId, Duration, Category, Amount, Reason, State, ApprovalId) VALUES
       (#{applyTime},#{startTime},#{endTime},#{staffId},#{duration},#{category},#{amount},#{reason},#{state},#{approvalId})
    </insert>

@@ -1,6 +1,8 @@
 package com.pojo.Vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.pojo.Attendance;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 import java.util.List;
@@ -8,7 +10,11 @@ import java.util.List;
 public class AttendanceVo {
     private Date dateId;
     private int clockSum; //打卡次数
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date checkInTime;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date signOutTime;
     private String remark;
 

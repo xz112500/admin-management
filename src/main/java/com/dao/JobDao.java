@@ -14,7 +14,7 @@ public interface JobDao {
     int queryJobId(String jobName);
 
     //查询所有工作岗位
-    List<Job> queryJobLimit(int pageNum);
+    List<Job> queryJobLimit();
 
     //添加工作岗位
     int addNewJob(Job newJob);

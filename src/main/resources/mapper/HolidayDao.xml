@@ -25,7 +25,7 @@
     </select>
 
     <!--添加假期-->
-    <insert id="addHolidayTimeByTime"  >
+    <insert id="addHolidayTimeByTime">
         insert into holidays(HolidayStartTime,HolidayEndTime) values(#{holidayStartTime},#{holidayEndTime});
     </insert>
 

@@ -13,7 +13,7 @@ public interface JobService {
     Job queryJobById(int jobId);
 
     //查询所有工作岗位
-    List<Job> queryJobLimit(int pageNum);
+    List<Job> queryJobLimit();
 
     //添加工作岗位
     int addNewJob(Job newJob);

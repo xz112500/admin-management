@@ -21,8 +21,8 @@ public class JobImpl implements JobService {
     }
 
     @Override
-    public List<Job> queryJobLimit(int pageNum) {
-        return adminJobDao.queryJobLimit((pageNum-1)*5);
+    public List<Job> queryJobLimit() {
+        return adminJobDao.queryJobLimit();
     }
 
     @Override

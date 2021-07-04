@@ -13,6 +13,11 @@ public class Holidays {
   @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
   private Date holidayEndTime;
 
+  public Holidays(Date holidayStartTime, Date holidayEndTime) {
+    this.holidayStartTime = holidayStartTime;
+    this.holidayEndTime = holidayEndTime;
+  }
+
   public Holidays() {
   }
 

@@ -22,7 +22,7 @@ public class HolidayImpl implements HolidayService {
 
     @Override
     public List<Holidays> queryHolidayAllTime(Integer pageNum, Integer pageSize) {
-        return holidayDao.queryHolidayAllTime((pageNum-1)*pageSize,pageSize);
+        return holidayDao.queryHolidayAllTime(pageNum,pageSize);
     }
     //查看该年假期
     @Override
@@ -35,7 +35,7 @@ public class HolidayImpl implements HolidayService {
         cal.add(Calendar.YEAR, 1);
         Date date2 = new Date();
         date2=cal.getTime();
-        return holidayDao.queryHolidayTimeByYear(date1,date2,(pageNum-1)*pageSize,pageSize);
+        return holidayDao.queryHolidayTimeByYear(date1,date2,pageNum,pageSize);
     }
     //添加假期
     @Override

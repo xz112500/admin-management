@@ -2,6 +2,7 @@ package com.controller;
 
 import com.annotation.Admin;
 import com.pojo.Holidays;
+import com.pojo.Vo.HolidayVo;
 import com.service.HolidayService;
 import com.utils.R;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,21 +27,20 @@ public class HolidaysController {
     @GetMapping("/queryHolidayTime")
     public R queryHolidayTime(@RequestParam(value = "pageNum",defaultValue = "1") Integer pageNum,
                               @RequestParam(value="pageSize",defaultValue = "4") Integer pageSize){
-        return r.success(holidaysService.queryHolidayAllTime(pageNum,pageSize));
+        return r.success(holidaysService.queryHolidayAllTime((pageNum-1)*pageSize,pageSize));
     }
 
     //查看该年假期
-    @GetMapping("/queryHolidayTimeByYear")
-    public R queryHolidayTimeByYear(@RequestParam(value = "date") Date date,
-                                    @RequestParam(value = "pageNum",defaultValue = "1") Integer pageNum,
-                                    @RequestParam(value="pageSize",defaultValue = "5") Integer pageSize){
-        return r.success(holidaysService.queryHolidayTimeByYear(date,pageNum,pageSize));
+    @PostMapping("/queryHolidayTimeByYear")
+    public R queryHolidayTimeByYear(@RequestBody HolidayVo holidayVo){
+        return r.success(holidaysService.queryHolidayTimeByYear(holidayVo.getDate(),
+                (holidayVo.getPageNum()-1)* holidayVo.getPageSize(),holidayVo.getPageSize()));
     }
 
     //添加假期
     @PostMapping("/addHolidayTimeByTime")
     @Admin
-    public R addHolidayTimeByTime(@RequestParam(value = "holidays") Holidays holidays){
+    public R addHolidayTimeByTime(@RequestBody Holidays holidays){
         return r.success(holidaysService.addHolidayTimeByTime(holidays));
     }
 

@@ -1,5 +1,6 @@
 package com.controller;
 
+import com.pojo.Askforleave;
 import com.service.AskforleaveService;
 import com.service.LeaveService;
 import com.utils.R;
@@ -44,5 +45,9 @@ public class AskforleaveController {
                              @PathVariable(value = "id") int id){
         int i = leaveService.updateById(state, id);
         return i > 0 ? r.success():r.error();
+    }
+    @PostMapping(value = "/AddLeave")
+    public R AddLeave(@RequestBody Askforleave askforleave){
+        return r.success(leaveService.InsertLeave(askforleave));
     }
 }

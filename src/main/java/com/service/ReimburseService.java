@@ -6,9 +6,12 @@
 package com.service;
 
 import com.pojo.Reimbursement;
+import com.pojo.Reimbursementcontent;
 import com.pojo.Reimbursementsubjects;
 import com.pojo.Vo.ReimbursementSubVo;
 import com.pojo.Vo.ReimbursementVo;
+import org.apache.ibatis.annotations.Param;
+
 import java.util.List;
 
 public interface ReimburseService {
@@ -43,4 +46,9 @@ public interface ReimburseService {
     List<Reimbursement> queryReimById(int id);
 
     List<Reimbursement> queryMyReim(Integer state,Integer subjectId,Integer totalAmount,int applicant);
+
+
+    int updateStateById(int state, int reimId);
+
+    List<Reimbursementcontent> queryAllContent();
 }

@@ -32,8 +32,8 @@
     </resultMap>
     <select id="queryTripInfoById" resultMap="queryAllTripInfo">
         select * from trip  a
-        left join otherconsume o on a.StaffId = o.TripId
-        left join schedule s on a.StaffId = s.TripId
+        left join otherconsume o on a.TripId = o.TripId
+        left join schedule s on a.TripId = s.TripId
         where a.StaffId = #{id}
     </select>
     <!--出差情况-->
