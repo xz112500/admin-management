@@ -1,5 +1,6 @@
 package com.controller;
 
+import com.annotation.Admin;
 import com.pojo.Askforleave;
 import com.service.AskforleaveService;
 import com.service.LeaveService;
@@ -41,13 +42,15 @@ public class AskforleaveController {
     }
     //修改批准状态
     @PutMapping(value = "/updateStateById/{state}/{id}")
+    @Admin
     public R updateStateById(@PathVariable(value = "state") int state,
                              @PathVariable(value = "id") int id){
         int i = leaveService.updateById(state, id);
         return i > 0 ? r.success():r.error();
     }
     @PostMapping(value = "/AddLeave")
-    public R AddLeave(@RequestBody Askforleave askforleave){
+    public R AddLeave(@RequestBody(required = false) Askforleave askforleave){
+        askforleave.setApplyTime(new Date());
         return r.success(leaveService.InsertLeave(askforleave));
     }
 }

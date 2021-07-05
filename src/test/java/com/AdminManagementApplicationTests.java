@@ -3,6 +3,7 @@ package com;
 import com.dao.ReimbursementSubjectsDao;
 import com.pojo.Otherconsume;
 import com.service.OtherConsumeService;
+import com.service.StaffService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -17,6 +18,8 @@ class AdminManagementApplicationTests {
    private OtherConsumeService otherConsumeService;
    @Autowired
    private ReimbursementSubjectsDao reimbursementSubjectsDao;
+   @Autowired
+   private StaffService staffService;
     @Test
     void contextLoads() throws MalformedURLException {
    /*     String Filename="1232.com";
@@ -41,5 +44,8 @@ class AdminManagementApplicationTests {
     public void Test6(){
         System.out.println(reimbursementSubjectsDao.queryAllSub());
     }
-
+    @Test
+    public void  Test4(){
+        System.out.println(staffService.queryStaffByName("xz"));
+    }
 }

@@ -16,9 +16,9 @@ public interface TripService {
 
     int AddTrip(TripVo tripVo);
 
-    List<Trip> querySubordinateTrip(@Param("state")Integer state,
-                                    @Param("category") String category,
-                                    @Param("duration") Integer duration);
+    List<Trip> querySubordinateTrip(Integer state, String category,Integer duration);
 
     int updateStaffById(int state,int id);
+
+    List<Trip> queryEmpTrip(int staffId,Integer pageNum,Integer pageSize);
 }

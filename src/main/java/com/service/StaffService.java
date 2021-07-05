@@ -42,4 +42,6 @@ public interface StaffService {
     int updateStaffInfo(Staff staff);
 
     Staff queryStaffByName(String username);
+
+    List<Staff> queryBoss();
 }

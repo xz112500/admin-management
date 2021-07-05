@@ -75,4 +75,9 @@ public class TripImpl implements TripService {
     public int updateStaffById(int state, int id) {
         return tripDao.updateStaffById(state,id);
     }
+
+    @Override
+    public List<Trip> queryEmpTrip(int staffId,Integer pageNum,Integer pageSize) {
+        return tripDao.queryEmpTrip(staffId,pageNum,pageSize);
+    }
 }

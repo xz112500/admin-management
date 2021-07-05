@@ -67,7 +67,7 @@
         select a.*,b.*,c.* from staff a
         left join askforleave b on a.StaffId=b.Applicant
         left join organization c on c.OrganizationId =a.OrganizationId
-        where b.State=1
+        where b.State=0
         limit #{pageNum},#{pageSize}
     </select>
 <!--    登录验证-->
@@ -115,4 +115,7 @@
         Position=#{position},PhoneNumber=#{phoneNumber},Email=#{email},PhotoUrl=#{photoUrl}
         where StaffId=#{staffId}
     </update>
+    <select id="queryBoss" resultType="com.pojo.Staff">
+        select * from staff where DirectBoss=0
+    </select>
 </mapper>

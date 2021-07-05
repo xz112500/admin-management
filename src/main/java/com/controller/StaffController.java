@@ -64,10 +64,6 @@ public class StaffController {
         Staff staff = staffService.queryUserAndPass(username, password);
         return staff != null ? r.success(staff) : r.error().message("用户名或密码错误");
     }
-  /*  @GetMapping("/queryApprove")
-    public R queryApprove(){
-        return r.success(staffService.queryApprove());
-    }*/
 
     @GetMapping("/queryMyLeave")
     public R queryMyLeave(@RequestParam(value = "state",required = false) Integer state,
@@ -78,9 +74,13 @@ public class StaffController {
     //TODO 添加员工功能
     @PostMapping(value ="/AddStaff")
     @Admin
-    public R addNewStaff(@RequestBody Staff staff) {
+    public R addStaff(@RequestBody Staff staff) {
         int result = staffService.addNewStaff(staff);
-        return result >0 ? r.success():r.error();
+       if (result > 0) {
+           return r.success().message("添加成功");
+       } else {
+           return r.error().message("用户名已被注册");
+       }
     }
     //TODO 重置密码功能
     @PutMapping(value ="/rePassWord")
@@ -101,12 +101,11 @@ public class StaffController {
     @RequestMapping(value = "updateStaff", method = RequestMethod.POST)
     @Admin
     public R dateStaffInfo(@RequestBody Staff staff){
-        if(staffService.updateStaffInfo(staff)>1)
-        {
-            return r.success();
-        }else
-        {
-            return r.error();
-        }
+        int i = staffService.updateStaffInfo(staff);
+        return i > 0 ? r.success():r.error();
+    }
+    @GetMapping(value = "queryBoss")
+    public R queryBoss(){
+        return r.success(staffService.queryBoss());
     }
 }

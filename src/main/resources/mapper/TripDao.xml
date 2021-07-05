@@ -67,4 +67,11 @@
    <update id="updateStaffById">
       update trip set State = #{state} where TripId=#{id}
    </update>
+   <select id="queryEmpTrip" resultType="com.pojo.Trip" resultMap="TripMapper">
+      select * from trip a,staff b,organization c
+      where a.StaffId=b.StaffId
+      and b.OrganizationId=c.OrganizationId
+      and b.DirectBoss=#{staffId}
+      limit #{pageNum},#{pageSize}
+   </select>
 </mapper>

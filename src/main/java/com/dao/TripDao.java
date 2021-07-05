@@ -20,4 +20,8 @@ public interface TripDao {
 
     int updateStaffById(@Param("state") int state,
                         @Param("id") int id);
+
+    List<Trip> queryEmpTrip(@Param("staffId") int staffId,
+                            @Param("pageNum")Integer pageNum,
+                            @Param("pageSize") Integer pageSize);
 }

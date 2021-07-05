@@ -103,8 +103,9 @@ public class StaffImpl implements StaffService {
 
     @Override
     @Transactional
-    public int addNewStaff(Staff newStaff) {
-        return staffDao.addNewStaff(newStaff);
+    public int addNewStaff(Staff staff) {
+       return staffDao.queryStaffByName(staff.getUserName()) == null ? staffDao.addNewStaff(staff):-1;
+
     }
 
     @Override
@@ -128,6 +129,11 @@ public class StaffImpl implements StaffService {
     @Override
     public Staff queryStaffByName(String username) {
         return staffDao.queryStaffByName(username);
+    }
+
+    @Override
+    public List<Staff> queryBoss() {
+        return staffDao.queryBoss();
     }
 
 }

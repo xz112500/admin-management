@@ -51,7 +51,7 @@ public class LeaveImpl implements LeaveService {
     }
 
     @Override
-    public List<Askforleave> queryMyEmpAsk(int staffId) {
-        return askforLeaveDao.queryMyEmpAsk(staffId);
+    public List<Askforleave> queryMyEmpAsk(int staffId,Integer pageNum,Integer pageSize) {
+        return askforLeaveDao.queryMyEmpAsk(staffId,pageNum,pageSize);
     }
 }

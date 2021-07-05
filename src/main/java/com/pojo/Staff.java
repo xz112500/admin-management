@@ -25,7 +25,7 @@ public class Staff {
   private Date birthday;
   private int organizationId;
   private int jobId;
-  private String directBoss;
+  private int directBoss;
   private String birthplace;
   private String position;
   private String phoneNumber;
@@ -111,11 +111,11 @@ public class Staff {
     this.jobId = jobId;
   }
 
-  public String getDirectBoss() {
-    return this.directBoss;
+  public int getDirectBoss() {
+    return directBoss;
   }
 
-  public void setDirectBoss(String directBoss) {
+  public void setDirectBoss(int directBoss) {
     this.directBoss = directBoss;
   }
 

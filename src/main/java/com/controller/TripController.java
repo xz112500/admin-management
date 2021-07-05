@@ -1,5 +1,6 @@
 package com.controller;
 
+import com.annotation.Admin;
 import com.pojo.TripInfo;
 import com.pojo.Vo.TripVo;
 import com.service.TripService;
@@ -48,9 +49,16 @@ public class TripController {
         return r.success(tripService.querySubordinateTrip(state, category, duration));
     }
     @PutMapping("/updateStaffById/{state}/{id}")
+    @Admin
     public R updateStaffById(@PathVariable(value = "state") int state,
                              @PathVariable(value = "id") int id){
         int i = tripService.updateStaffById(state, id);
         return i > 0 ? r.success():r.error();
+    }
+    @GetMapping("/queryEmpTrip")
+    public R queryEmpTrip(@RequestParam(value = "staffId") int staffId,
+                          @RequestParam(value = "pageNum",defaultValue = "1") Integer pageNum,
+                          @RequestParam(value = "pageSize",defaultValue = "5") Integer pageSize){
+        return r.success(tripService.queryEmpTrip(staffId,(pageNum-1)*pageSize,pageSize));
     }
 }

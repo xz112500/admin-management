@@ -45,7 +45,7 @@ public class ReimburseImpl implements ReimburseService {
         expenseitem.setConsumeTime(reimbursementVo.getConsumeTime());
         expenseitem.setCost(reimbursementVo.getCost());
         expenseitem.setApplicant(reimbursementVo.getApplicant());
-            expenseItemService.AddExpenseItem(expenseitem);
+          int i = expenseItemService.AddExpenseItem(expenseitem);
             Reimbursement reimbursement = new Reimbursement();
             reimbursement.setApplyTime(new Date());
             reimbursement.setState(0);
@@ -53,7 +53,6 @@ public class ReimburseImpl implements ReimburseService {
             reimbursement.setApplicant(reimbursementVo.getApplicant());
             reimbursement.setSubjectId(reimbursementVo.getSubjectId());
             reimbursement.setTotalAmount(reimbursementVo.getTotalAmount());
-            int i = this.expenseItemService.AddExpenseItem(expenseitem);
             return i > 0 ? this.reimbursementDao.AddReimburse(reimbursement) : -1;
     }
 

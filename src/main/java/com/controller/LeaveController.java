@@ -1,5 +1,6 @@
 package com.controller;
 
+import com.annotation.Admin;
 import com.pojo.Askforleave;
 import com.service.LeaveService;
 import com.utils.R;
@@ -21,6 +22,7 @@ public class LeaveController {
         return leaveService.InsertLeave(askforleave) > 0 ? r.success() : r.error();
     }
     @PutMapping("/updateStateById")
+    @Admin
     public R updateStateById(@RequestParam(value = "state") Integer state,
                              @RequestParam(value = "id") Integer id){
         return leaveService.updateById(state,id) > 0 ? r.success() : r.error();
@@ -54,8 +56,10 @@ public class LeaveController {
     }
     //查看下属请假
     @GetMapping("/queryMyEmpAsk")
-    public R queryMyEmpAsk(@RequestParam(value = "staffId") Integer staffId){
-        return r.success(leaveService.queryMyEmpAsk(staffId));
+    public R queryMyEmpAsk(@RequestParam(value = "staffId") Integer staffId,
+                           @RequestParam(value = "pageNum",defaultValue = "1") Integer pageNum,
+                           @RequestParam(value = "pageSize",defaultValue = "5") Integer pageSize){
+        return r.success(leaveService.queryMyEmpAsk(staffId,(pageNum-1)*pageSize,pageSize));
     }
     //模糊查假
 

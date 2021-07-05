@@ -30,6 +30,12 @@
             <result column="Email" property="email"/>
             <result column="PhotoUrl" property="photoUrl"/>
         </association>
+        <association property="organization" javaType="com.pojo.Organization">
+            <id column="OrganizationId" property="organizationId"/>
+            <result column="Name" property="name"/>
+            <result column="HigherOrgId" property="higherOrgId"/>
+            <result column="Remark" property="remark"/>
+        </association>
     </resultMap>
    <!-- 新增请假-->
     <insert id="InsertLeave" parameterType="com.pojo.Askforleave" keyProperty="LeaveId">
@@ -64,7 +70,10 @@
     </select>
     <!--查看下属请假-->
     <select id="queryMyEmpAsk" resultType="com.pojo.Askforleave" resultMap="LeaveMapper">
-        select * from am_system.askforleave a, am_system.staff b where b.DirectBoss=#{directBoss} and a.Applicant=b.StaffId;
+        select * from am_system.askforleave a, am_system.staff b ,organization c
+        where b.DirectBoss=#{staffId} and a.Applicant=b.StaffId
+        and c.OrganizationId=b.OrganizationId and a.State=0
+        limit #{pageNum},#{pageSize};
     </select>
     <!--查看该月的请假记录-->
     <select id="queryAskforleaveAllByTime"  resultMap="LeaveMapper">

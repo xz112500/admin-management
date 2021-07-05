@@ -13,11 +13,11 @@ public class Askforleave {
   @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
   @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
   private Date applyTime;
-  @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-  @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+  @DateTimeFormat(pattern = "yyyy-MM-dd")
+  @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
   private Date startTime;
-  @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-  @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+  @DateTimeFormat(pattern = "yyyy-MM-dd")
+  @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
   private Date endTime;
   private int duration;
   private int applicant;
@@ -26,8 +26,21 @@ public class Askforleave {
   private int state;
   private String approvalId;
   private Staff staff;
+  private Organization organization;
 
   public Askforleave() {
+  }
+
+  public Askforleave(Date applyTime, Date startTime, Date endTime, int duration, int applicant, String category, String reason, int state, String approvalId) {
+    this.applyTime = applyTime;
+    this.startTime = startTime;
+    this.endTime = endTime;
+    this.duration = duration;
+    this.applicant = applicant;
+    this.category = category;
+    this.reason = reason;
+    this.state = state;
+    this.approvalId = approvalId;
   }
 
   public int getLeaveId() {
@@ -116,5 +129,13 @@ public class Askforleave {
 
   public void setStaff(Staff staff) {
     this.staff = staff;
+  }
+
+  public Organization getOrganization() {
+    return organization;
+  }
+
+  public void setOrganization(Organization organization) {
+    this.organization = organization;
   }
 }

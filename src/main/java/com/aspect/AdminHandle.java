@@ -48,30 +48,28 @@ public class AdminHandle {
         String token = request.getHeader("token");
     /*    System.out.println("发送的"+token);*/
         Claims claims = null;
+        Object o=null;
         if (token == null) {
             return this.r.error().message("请重新登录!");
-        } else {
+        }
             try {
                 claims = JWTUtil.parseToken(token);
-            } catch (Exception var9) {
+            } catch (Exception e) {
                 return this.r.error().message("身份验证失败");
             }
-
             String username = (String)claims.get("username");
-    /*        String password = (String)claims.get("password");*/
             Staff staff = this.staffService.queryStaffByName(username);
       /*      System.out.println("数据库的"+staff.getToken());*/
             if (token.equals(staff.getToken())) {
                 if (staff.getState() == 0 || staff.getJobId() != 4) {
                     return this.r.error().message("您无权操作");
                 }else {
-                    joinPoint.proceed();
+                    o = joinPoint.proceed();
                 }
             }else {
                 return this.r.error().message("身份信息不一致");
             }
-        }
-        return r.success();
+            return  o;
     }
 
     public Method getMethod(ProceedingJoinPoint joinPoint) {

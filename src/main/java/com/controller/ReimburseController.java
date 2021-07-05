@@ -1,5 +1,6 @@
 package com.controller;
 
+import com.annotation.Admin;
 import com.pojo.Reimbursement;
 import com.pojo.Vo.ReimbursementSubVo;
 import com.pojo.Vo.ReimbursementVo;
@@ -64,6 +65,7 @@ public class ReimburseController {
         return r.success(reimburseService.queryMyReim(state, subjectId, totalAmount,applicant));
     }
     @PutMapping(value = "/updateStateById/{state}/{reimId}")
+    @Admin
     public R updateStateById(@PathVariable(value = "state") int state,
                              @PathVariable(value = "reimId") int reimId){
         int i = reimburseService.updateStateById(state, reimId);

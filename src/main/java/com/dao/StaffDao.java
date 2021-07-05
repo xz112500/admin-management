@@ -44,7 +44,7 @@ public interface StaffDao {
     /**
      * 添加新员工
      */
-    int addNewStaff(Staff newStaff);
+    int addNewStaff(Staff staff);
 
     /**
      * 重置密码
@@ -62,4 +62,6 @@ public interface StaffDao {
     int updateStaffInfo(Staff staff);
 
     Staff queryStaffByName(@Param("username") String username);
+
+    List<Staff> queryBoss();
 }

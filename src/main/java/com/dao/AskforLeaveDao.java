@@ -42,11 +42,13 @@ public interface AskforLeaveDao {
 
     List<Askforleave> queryMyAcc(int staffId);
 
-    List<Askforleave> queryMyAsk(int staffId);
+    List<Askforleave> queryMyAsk(@Param("staffId") int staffId);
 
     List<Askforleave> queryOrgAsk();
 
-    List<Askforleave> queryMyEmpAsk(int staffId);
+    List<Askforleave> queryMyEmpAsk(@Param("staffId") int staffId,
+                                    @Param("pageNum") Integer pageNum,
+                                    @Param("pageSize") Integer pageSize);
 
     //查看该月的请假记录
     List<Askforleave> queryAskforleaveAllByTime(int id, Date stratTime, Date endTime, Integer pageNum, Integer pageSize);

@@ -43,6 +43,6 @@ public interface LeaveService {
 
     List<Askforleave> queryOrgAsk();
 
-    List<Askforleave> queryMyEmpAsk(int staffId);
+    List<Askforleave> queryMyEmpAsk(int staffId,Integer pageNum,Integer pageSize);
 
 }
