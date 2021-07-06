@@ -35,7 +35,7 @@ public class OrganizationImpl implements OrganizationService {
     }
 
     @Override
-    public int updateOrganization(Organization organization) {
-        return adminOrganizationDao.updateOrganization(organization);
+    public int UpdateOrganization(Organization organization) {
+        return adminOrganizationDao.UpdateOrganization(organization);
     }
 }

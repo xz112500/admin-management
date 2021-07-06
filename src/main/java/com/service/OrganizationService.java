@@ -18,5 +18,5 @@ public interface OrganizationService {
     int deleteOrganizationById(int organizationId);
 
     //修改部门信息
-    int updateOrganization(Organization organization);
+    int UpdateOrganization(Organization organization);
 }

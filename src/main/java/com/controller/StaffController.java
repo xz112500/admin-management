@@ -83,9 +83,9 @@ public class StaffController {
        }
     }
     //TODO 重置密码功能
-    @PutMapping(value ="/rePassWord")
+    @PutMapping(value ="/rePassWord/{staffId}")
     @Admin
-    public R rePassWord(@RequestParam("staffId") Integer staffId)
+    public R rePassWord(@PathVariable("staffId") Integer staffId)
     {
         int result = staffService.rePassword(staffId);
         return result > 0 ? r.success():r.error();

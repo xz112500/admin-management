@@ -19,19 +19,14 @@ public class OrganizationController {
     @Autowired
     private OrganizationService OrganizationService;
 
-    //TODO 分页展示员工信息功能
     @RequestMapping(value = "/ShowOrganizationInfoLimit",method = RequestMethod.GET)
-    public R showOrganizationInfo(@RequestParam("pageNum") Integer pageNum,
-                                  @RequestParam("pageSize") Integer pageSize)
+    public R showOrganizationInfo(@RequestParam(value = "pageNum",defaultValue = "1") Integer pageNum,
+                                  @RequestParam(value = "pageSize",defaultValue = "100") Integer pageSize)
     {
         List<Organization> organizations = OrganizationService.queryOrganizationLimit((pageNum-1)*pageSize,pageSize);
-        if (CollectionUtils.isEmpty(organizations)){
-            return r.error();
-        }
         return r.success(organizations);
     }
 
-    //TODO 添加新部门功能
     @RequestMapping(value ="/AddOrganization",method = RequestMethod.POST)
     @Admin
     public R addNewStaff(@RequestBody Organization organization) {
@@ -39,22 +34,19 @@ public class OrganizationController {
         return result > 0 ? r.success():r.error();
     }
 
-    //TODO 删除现有部门功能
     @RequestMapping(value = "/DeleteOrganization/{organizationId}",method = RequestMethod.DELETE)
     @Admin
     public R deleteStaff(@PathVariable("organizationId") int organizationId) {
         return r.success(OrganizationService.deleteOrganizationById(organizationId));
     }
 
-    //TODO 修改现有部门功能
-    @RequestMapping(value ="/UpdateOrganization",method = RequestMethod.PUT)
+    @RequestMapping(value ="/UpdateOrganization",method = RequestMethod.POST)
     @Admin
     public R updateOrganization(@RequestBody Organization organization) {
-        int result = OrganizationService.updateOrganization(organization);
+        int result = OrganizationService.UpdateOrganization(organization);
         return result > 0 ? r.success():r.error();
     }
 
-    //TODO 根据ID查询部门功能
     @RequestMapping(value ="/ShowOrganizationById",method = RequestMethod.GET)
     public R showOrganizationById(@RequestBody int organizationId) {
         Organization organization = OrganizationService.queryOrganizationById(organizationId);

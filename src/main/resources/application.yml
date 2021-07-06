@@ -4,8 +4,8 @@ server:
 spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
-    url: jdbc:mysql://8.140.107.62:3306/am_system?useUnicode=true&characterEncoding=UTF-8&serverTimezone=GMT%2b8
-    username: xzfine
+    url: jdbc:mysql://localhost:3306/am_system?useUnicode=true&characterEncoding=UTF-8&serverTimezone=GMT%2b8
+    username: root
     password: Xz112500
     driver-class-name: com.mysql.cj.jdbc.Driver
     druid:

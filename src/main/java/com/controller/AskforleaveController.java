@@ -5,6 +5,7 @@ import com.pojo.Askforleave;
 import com.service.AskforleaveService;
 import com.service.LeaveService;
 import com.utils.R;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -27,6 +28,7 @@ public class AskforleaveController {
      */
     //所有请假记录
     @GetMapping("/queryAttendanceDay")
+    @ApiOperation(value = "查询请假记录")
     public R queryAttendanceDay(@RequestParam(value = "staffId") int staffId,
                                 @RequestParam(value = "pageNum",defaultValue = "1") Integer pageNum,
                                 @RequestParam(value="pageSize",defaultValue = "5") Integer pageSize){
