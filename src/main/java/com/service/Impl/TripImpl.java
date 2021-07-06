@@ -36,8 +36,8 @@ public class TripImpl implements TripService {
         return tripInfoDao.queryTripInfoById(id);
     }
 
-    public List<Trip> queryApproveTrip() {
-        return tripDao.queryApproveTrip();
+    public List<Trip> queryApproveTrip(int staffId) {
+        return tripDao.queryApproveTrip(staffId);
     }
 
     public int AddTrip(TripVo tripVo) {

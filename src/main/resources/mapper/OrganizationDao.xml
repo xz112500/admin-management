@@ -10,4 +10,11 @@
         update organization set Name=#{name},HigherOrgId=#{higherOrgId},Remark=#{remark}
         where OrganizationId=#{organizationId}
     </update>
+    <insert id="addNewOrganization">
+        insert into am_system.organization (Name,HigherOrgId,Remark)
+        values (#{name},#{higherOrgId},#{remark})
+    </insert>
+    <delete id="deleteOrganizationById">
+        delete from organization where OrganizationId=#{organizationId}
+    </delete>
 </mapper>

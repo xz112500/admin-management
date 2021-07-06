@@ -39,13 +39,13 @@
         <result column="Applicant" property="applicant"/>
         <result column="Category" property="category"/>
         <result column="Reason" property="reason"/>
-        <result column="State" property="state"/>
+        <result column="a_State" property="a_state"/>
         <result column="ApprovalId" property="approvalId"/>
     </collection>
     </resultMap>
 <!--    通过id查询员工请假信息-->
     <select id="queryStaffById" resultType="com.pojo.Staff" resultMap="StaffMapper">
-        select a.*,b.*,c.*,j.* from staff a
+        select a.*,c.*,j.*,b.* from staff a
         inner join askforleave b on a.StaffId = b.Applicant
         inner join organization c on c.OrganizationId =
         any (select a.OrganizationId from staff where a.StaffId = #{arg0})
@@ -67,7 +67,7 @@
         select a.*,b.*,c.* from staff a
         left join askforleave b on a.StaffId=b.Applicant
         left join organization c on c.OrganizationId =a.OrganizationId
-        where b.State=0
+        where b.a_State=0
         limit #{pageNum},#{pageSize}
     </select>
 <!--    登录验证-->

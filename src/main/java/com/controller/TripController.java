@@ -1,6 +1,7 @@
 package com.controller;
 
 import com.annotation.Admin;
+import com.pojo.Trip;
 import com.pojo.TripInfo;
 import com.pojo.Vo.TripVo;
 import com.service.TripService;
@@ -38,8 +39,12 @@ public class TripController {
     }
     //查询未批准出差
     @GetMapping("/queryApprove")
-    public R queryApprove(){
-        return r.success(tripService.queryApproveTrip());
+    public R queryApprove(@RequestParam(value = "staffId") int staffId,
+                          @RequestParam(value = "pageNum") Integer pageNum,
+                          @RequestParam(value = "pageSize") Integer pageSize){
+        List<Trip> trips = tripService.queryApproveTrip(staffId);
+        List<Trip> collect = trips.stream().skip((long) (pageNum - 1) * pageSize).limit(pageSize).collect(Collectors.toList());
+        return r.success(collect);
     }
     //查看该月的出差记录
     @GetMapping("/querySubordinateTrip")

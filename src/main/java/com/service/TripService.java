@@ -12,7 +12,7 @@ public interface TripService {
 
     List<TripInfo> queryTripInfoById(int id);
 
-    List<Trip> queryApproveTrip();
+    List<Trip> queryApproveTrip(int staffId);
 
     int AddTrip(TripVo tripVo);
 

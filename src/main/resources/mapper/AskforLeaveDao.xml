@@ -11,7 +11,7 @@
             <result column="Applicant" property="applicant"/>
             <result column="Category" property="category"/>
             <result column="Reason" property="reason"/>
-            <result column="State" property="state"/>
+            <result column="a_State" property="a_state"/>
             <result column="ApprovalId" property="approvalId"/>
         <association property="staff" javaType="com.pojo.Staff">
             <id column="StaffId" property="staffId"/>
@@ -39,12 +39,12 @@
     </resultMap>
    <!-- 新增请假-->
     <insert id="InsertLeave" parameterType="com.pojo.Askforleave" keyProperty="LeaveId">
-        insert into askforleave (ApplyTime,StartTime,EndTime,Duration,Applicant,Category,Reason,State,ApprovalId)
-        value (#{applyTime},#{startTime},#{endTime},#{duration},#{applicant},#{category},#{reason},#{state},#{approvalId})
+        insert into askforleave (ApplyTime,StartTime,EndTime,Duration,Applicant,Category,Reason,a_State,ApprovalId)
+        value (#{applyTime},#{startTime},#{endTime},#{duration},#{applicant},#{category},#{reason},#{a_state},#{approvalId})
     </insert>
     <!--修改批准状态-->
     <update id="updateStateById">
-        update askforleave set State = #{state} where LeaveId = #{id}
+        update askforleave set a_State = #{state} where LeaveId = #{id}
     </update>
     <!--查询所有请假-->
     <select id="queryAllLeave" resultType="com.pojo.Askforleave" resultMap="LeaveMapper">
@@ -53,7 +53,7 @@
    <!-- 查看所有未批准请假-->
     <select id="queryApprove" resultType="com.pojo.Askforleave" resultMap="LeaveMapper">
         select * from askforleave a inner join staff b on a.Applicant=b.StaffId
-        where a.State=0
+        where a.a_State=0
     </select>
 
     <!--查看我审批的假-->
@@ -72,7 +72,7 @@
     <select id="queryMyEmpAsk" resultType="com.pojo.Askforleave" resultMap="LeaveMapper">
         select * from am_system.askforleave a, am_system.staff b ,organization c
         where b.DirectBoss=#{staffId} and a.Applicant=b.StaffId
-        and c.OrganizationId=b.OrganizationId and a.State=0
+        and c.OrganizationId=b.OrganizationId and a.a_State=0
         limit #{pageNum},#{pageSize};
     </select>
     <!--查看该月的请假记录-->

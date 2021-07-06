@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 public interface TripDao {
     List<Trip> queryAllTrip();
 
-    List<Trip> queryApproveTrip();
+    List<Trip> queryApproveTrip(@Param("staffId")int staffId);
 
     int AddTrip(Trip trip);
 

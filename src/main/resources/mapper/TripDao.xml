@@ -38,7 +38,7 @@
       select a.*,c.*,s.* from trip a
       left join staff s on s.StaffId=a.StaffId
       left join organization c on c.OrganizationId=s.OrganizationId
-      where a.State=0
+      where a.State=0 and s.DirectBoss=#{staffId}
       order by a.ApplyTime
    </select>
    <insert id="AddTrip">

@@ -23,7 +23,7 @@ public class Askforleave {
   private int applicant;
   private String category;
   private String reason;
-  private int state;
+  private int a_state;
   private String approvalId;
   private Staff staff;
   private Organization organization;
@@ -31,7 +31,7 @@ public class Askforleave {
   public Askforleave() {
   }
 
-  public Askforleave(Date applyTime, Date startTime, Date endTime, int duration, int applicant, String category, String reason, int state, String approvalId) {
+  public Askforleave(Date applyTime, Date startTime, Date endTime, int duration, int applicant, String category, String reason, int a_state, String approvalId) {
     this.applyTime = applyTime;
     this.startTime = startTime;
     this.endTime = endTime;
@@ -39,7 +39,7 @@ public class Askforleave {
     this.applicant = applicant;
     this.category = category;
     this.reason = reason;
-    this.state = state;
+    this.a_state = a_state;
     this.approvalId = approvalId;
   }
 
@@ -107,12 +107,12 @@ public class Askforleave {
     this.reason = reason;
   }
 
-  public int getState() {
-    return state;
+  public int getA_state() {
+    return a_state;
   }
 
-  public void setState(int state) {
-    this.state = state;
+  public void setA_state(int a_state) {
+    this.a_state = a_state;
   }
 
   public String getApprovalId() {
