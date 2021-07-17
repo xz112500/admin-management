@@ -10,7 +10,7 @@
     </resultMap>
 
     <select id="queryHolidayTime"  resultType="com.pojo.Holidays">
-        select * from am_system.holidays limit #{arg0},#{arg1};
+        select * from am_system.holidays ;
     </select>
     <!--节假日修改-->
     <!--查看全部假期-->
@@ -19,10 +19,10 @@
     </select>
 
     <!--查看该年假期-->
-    <select id="queryHolidayTimeByYear"  resultType="com.pojo.Holidays" resultMap="HolidaysMap">
+<!--    <select id="queryHolidayTimeByYear"  resultType="com.pojo.Holidays" resultMap="HolidaysMap">
         select * from am_system.holidays where UNIX_TIMESTAMP(HolidayStartTime)>=UNIX_TIMESTAMP(#{arg0})
                                            and UNIX_TIMESTAMP(#{arg1})>UNIX_TIMESTAMP(HolidayEndTime) limit #{arg2},#{arg3};
-    </select>
+    </select>-->
 
     <!--添加假期-->
     <insert id="addHolidayTimeByTime">

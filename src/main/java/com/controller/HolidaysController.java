@@ -4,8 +4,10 @@ import com.annotation.Admin;
 import com.pojo.Holidays;
 import com.pojo.Vo.HolidayVo;
 import com.service.HolidayService;
+import com.utils.BeanUtil;
 import com.utils.R;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,10 +33,9 @@ public class HolidaysController {
     }
 
     //查看该年假期
-    @PostMapping("/queryHolidayTimeByYear")
-    public R queryHolidayTimeByYear(@RequestBody HolidayVo holidayVo){
-        return r.success(holidaysService.queryHolidayTimeByYear(holidayVo.getDate(),
-                (holidayVo.getPageNum()-1)* holidayVo.getPageSize(),holidayVo.getPageSize()));
+    @GetMapping("/queryHolidayTimeByYear")
+    public R queryHolidayTimeByYear(@RequestParam("year") @DateTimeFormat(pattern="yyyy-MM-dd") Date year){
+        return r.success(holidaysService.queryHolidayTimeByYear(year));
     }
 
     //添加假期

@@ -32,9 +32,9 @@ public class AttendanceController {
     }
 
     //查看个人的日考勤情况按选择的时间来查
-    @GetMapping("queryAttendanceDayByTime")
+    @GetMapping("/queryAttendanceDayByTime")
     public R queryAttendanceDayByTime(@RequestParam(value = "staffId") int staffId,
-                                      @RequestParam(value = "date")Date date,
+                                      @RequestParam(value = "date") @DateTimeFormat(pattern = "yyyy-MM-dd") Date date,
                                       @RequestParam(value = "pageNum",defaultValue = "1") Integer pageNum,
                                       @RequestParam(value="pageSize",defaultValue = "5") Integer pageSize){
         return r.success(attendanceService.queryAttendanceDayByTime(staffId, date, pageNum, pageSize));
@@ -45,7 +45,7 @@ public class AttendanceController {
     //查看个人的月考勤情况按选择的时间来查
     @GetMapping("queryAttendanceMonthByTime")
     public R queryAttendanceMonthByTime(@RequestParam(value = "staffId") int staffId,
-                                      @RequestParam(value = "date") @DateTimeFormat(pattern = "yyyy-MM") Date date,
+                                      @RequestParam(value = "date") @DateTimeFormat(pattern = "yyyy-MM-dd") Date date,
                                       @RequestParam(value = "pageNum",defaultValue = "1") Integer pageNum,
                                       @RequestParam(value="pageSize",defaultValue = "5") Integer pageSize){
         return r.success(attendanceService.queryAttendanceMonthByTime(staffId, date, pageNum, pageSize));

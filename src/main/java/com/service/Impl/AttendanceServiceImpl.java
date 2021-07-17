@@ -1,21 +1,28 @@
 package com.service.Impl;
 
+import ch.qos.logback.core.util.TimeUtil;
 import com.dao.AttendanceDao;
+import com.dao.HolidayDao;
 import com.pojo.Attendance;
+import com.pojo.Holidays;
 import com.pojo.Vo.AttendanceVo;
 import com.pojo.Vo.AttendanceVo1;
 import com.service.AttendanceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class AttendanceServiceImpl implements AttendanceService {
     @Autowired
     private AttendanceDao attendanceDao;
+    @Autowired
+    private HolidayDao holidayDao;
     /**
      * 个人考勤查看
      * 日查询
@@ -44,8 +51,32 @@ public class AttendanceServiceImpl implements AttendanceService {
      */
     //查看个人的月考勤情况按选择的时间来查
     @Override
-    public AttendanceVo1 queryAttendanceMonthByTime(int staffId, Date time, Integer pageNum, Integer pageSize) {
-        ArrayList<AttendanceVo> attendanceVos = new ArrayList<>();
+    public List<Attendance> queryAttendanceMonthByTime(int staffId, Date date, Integer pageNum, Integer pageSize) {
+        List<Attendance> attendances = attendanceDao.queryAttendanceMonthByTime(staffId, pageNum, pageSize);
+        Calendar calendar=Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.add(Calendar.MONTH,1);
+        calendar.add(Calendar.DAY_OF_MONTH,-30);
+        Integer[] arr ={1,3,5,7,8,10,12};
+        List<Integer> arrs=Arrays.asList(arr);
+        int month=date.getMonth()+2;
+        boolean contains = arrs.contains(month);
+        if (contains){
+            calendar.add(Calendar.DAY_OF_MONTH,1);
+        }
+        if (month == 2){
+            calendar.add(Calendar.DAY_OF_MONTH,28);
+        } else {calendar.add(Calendar.DAY_OF_MONTH,30);}
+        List<Attendance> collect = attendances.stream().filter(n -> n.getDateId().after(date)
+        && n.getDateId().before(calendar.getTime())||n.getDateId().equals(calendar.getTime()))
+        .collect(Collectors.toList());
+        if (CollectionUtils.isEmpty(collect)){
+            return Collections.emptyList();
+        }else {
+            return collect;
+        }
+
+    /*    ArrayList<AttendanceVo> attendanceVos = new ArrayList<>();
         Date date1 = new Date();
         Calendar cal = Calendar.getInstance();
         cal.setTime(time);
@@ -108,7 +139,7 @@ public class AttendanceServiceImpl implements AttendanceService {
         attendanceVo1.setOutSum(outSum);
         attendanceVo1.setTrip(trip);
 
-        return attendanceVo1;
+        return attendanceVo1;*/
     }
 
 }

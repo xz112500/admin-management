@@ -136,4 +136,14 @@ public class StaffImpl implements StaffService {
         return staffDao.queryBoss();
     }
 
+    @Override
+    public List<Staff> queryListById(List<Integer> names) {
+        return staffDao.queryListById(names);
+    }
+
+    @Override
+    public int deleteListById(List<Integer> ids) {
+        return staffDao.deleteListById(ids);
+    }
+
 }

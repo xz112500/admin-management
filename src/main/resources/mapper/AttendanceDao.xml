@@ -37,11 +37,8 @@
     <!--个人考勤查看 月查询-->
     <!--查看个人的月考勤情况按选择的时间来查-->
     <select id="queryAttendanceMonthByTime" resultMap="AttendanceMap">
-        SELECT * FROM attendance a,clockintime c WHERE  a.StaffId=#{arg0} AND c.StaffId=#{arg0}
-        AND UNIX_TIMESTAMP(c.`ClockInTime`)>=UNIX_TIMESTAMP(a.`CheckInTime`)
-        AND UNIX_TIMESTAMP(a.`SignOutTime`)>=UNIX_TIMESTAMP(c.`ClockInTime`)
-        AND UNIX_TIMESTAMP(a.DateId)>=UNIX_TIMESTAMP(#{arg1})
-        And UNIX_TIMESTAMP(#{arg2})>UNIX_TIMESTAMP(a.DateId) LIMIT #{arg3},#{arg4}
+        SELECT * FROM attendance a,clockintime c WHERE  a.StaffId=#{staffId} AND c.StaffId=#{staffId}
+        limit #{pageNum},#{pageSize}
     </select>
     <!--查考勤单表（补充按月查service）-->
     <select id="queryAttendanceAll" resultType="com.pojo.Attendance">

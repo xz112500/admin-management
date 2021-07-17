@@ -1,6 +1,7 @@
 package com.dao;
 
 import com.pojo.Attendance;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.Date;
@@ -20,7 +21,9 @@ public interface AttendanceDao {
      * 月查询
      */
     //查看个人的月考勤情况按选择的时间来查
-    List<Attendance> queryAttendanceMonthByTime(int staffId, Date stratTime, Date endTime, Integer pageNum, Integer pageSize);
+    List<Attendance> queryAttendanceMonthByTime(@Param("staffId") int staffId,
+                                                @Param("pageNum")Integer pageNum,
+                                                @Param("pageSize") Integer pageSize);
     //查考勤单表（补充按月查service）
     List<Attendance> queryAttendanceAll(int staffId, Date stratTime, Date endTime, Integer pageNum, Integer pageSize);
 }

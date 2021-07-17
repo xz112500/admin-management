@@ -64,4 +64,8 @@ public interface StaffDao {
     Staff queryStaffByName(@Param("username") String username);
 
     List<Staff> queryBoss();
+
+    List<Staff> queryListById(@Param("names") List<Integer> names);
+
+    int deleteListById(@Param("ids") List<Integer> ids);
 }

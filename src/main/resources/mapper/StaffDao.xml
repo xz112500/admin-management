@@ -118,4 +118,17 @@
     <select id="queryBoss" resultType="com.pojo.Staff">
         select * from staff where DirectBoss=0
     </select>
+   <select id="queryListById" parameterType="list" resultType="com.pojo.Staff">
+    select * from staff where StaffId in
+    <foreach collection="names" item="item" index="index" open="("  close=")" separator=",">
+        #{item}
+    </foreach>
+   </select>
+    <delete id="deleteListById" parameterType="list">
+        delete from am_system.staff where am_system.staff.StaffId in
+    <foreach collection="ids" item="item" open="(" separator="," close=")">
+        #{item}
+    </foreach>
+    </delete>
+
 </mapper>

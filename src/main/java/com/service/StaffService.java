@@ -29,9 +29,9 @@ public interface StaffService {
 
     int updateToken(String token, int id);
 
-    List<Staff> queryMyLeave(@Param("state")Integer state,
-                             @Param("category") String category,
-                             @Param("duration") Integer duration);
+    List<Staff> queryMyLeave(Integer state,
+                             String category,
+                             Integer duration);
 
     int addNewStaff(Staff newStaff);
 
@@ -44,4 +44,8 @@ public interface StaffService {
     Staff queryStaffByName(String username);
 
     List<Staff> queryBoss();
+
+    List<Staff> queryListById(List<Integer> names);
+
+    int deleteListById( List<Integer> ids);
 }

@@ -6,10 +6,11 @@ import com.service.HolidayService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
+import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 @Service
 public class HolidayImpl implements HolidayService {
@@ -17,25 +18,35 @@ public class HolidayImpl implements HolidayService {
     private HolidayDao holidayDao;
     @Override
     public List<Holidays> queryHolidayTime() {
-        return holidayDao.queryHolidayTime();
+        List<Holidays> holidays = holidayDao.queryHolidayTime();
+        List<Holidays> collect = holidays.stream().sorted(Comparator.comparing(Holidays::getHolidayEndTime).reversed())
+                .collect(Collectors.toList());
+        return collect;
     }
 
     @Override
     public List<Holidays> queryHolidayAllTime(Integer pageNum, Integer pageSize) {
-        return holidayDao.queryHolidayAllTime(pageNum,pageSize);
+        List<Holidays> holidays = holidayDao.queryHolidayAllTime(pageNum, pageSize);
+        List<Holidays> collect = holidays.stream().sorted(Comparator.comparing(Holidays::getHolidayEndTime).reversed())
+                .collect(Collectors.toList());
+        return collect;
     }
     //查看该年假期
     @Override
-    public List<Holidays> queryHolidayTimeByYear(Date year, Integer pageNum, Integer pageSize) {
-        Date date1 = new Date();
-        Long stratTime= year.getTime();
+    public List<Holidays> queryHolidayTimeByYear(Date year) {
         Calendar cal = Calendar.getInstance();
         cal.setTime(year);
-        date1=cal.getTime();
-        cal.add(Calendar.YEAR, 1);
-        Date date2 = new Date();
-        date2=cal.getTime();
-        return holidayDao.queryHolidayTimeByYear(date1,date2,pageNum,pageSize);
+        cal.add(Calendar.MONTH,12);
+        cal.add(Calendar.DAY_OF_MONTH,31);
+        List<Holidays> holidays = holidayDao.queryHolidayTime();
+        System.out.println(holidays);
+        List<Holidays> collect = holidays.stream().filter(n -> n.getHolidayStartTime().after(year)
+                && n.getHolidayEndTime().before(cal.getTime())).collect(Collectors.toList());
+        System.out.println(collect);
+      /* if (CollectionUtils.isEmpty(collect)){
+            return Collections.emptyList();
+        }*/
+        return CollectionUtils.isEmpty(collect)?Collections.emptyList():collect;
     }
     //添加假期
     @Override

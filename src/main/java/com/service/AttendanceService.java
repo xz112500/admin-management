@@ -19,6 +19,6 @@ public interface AttendanceService {
      * 月查询
      */
     //查看个人的月考勤情况按选择的时间来查
-    AttendanceVo1 queryAttendanceMonthByTime(int staffId, Date time, Integer pageNum, Integer pageSize);
+    List<Attendance> queryAttendanceMonthByTime(int staffId, Date date, Integer pageNum, Integer pageSize);
 
 }
